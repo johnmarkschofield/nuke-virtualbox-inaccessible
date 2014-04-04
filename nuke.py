@@ -17,6 +17,9 @@ if len(output) == 0:
 
 print('Removing inaccessible VMs:')
 for aline in output.split('\n'):
+    name = aline.split(' ')[0]
+    if "inaccessible" not in name:
+        continue
     guid = aline.split(' ')[1]
     status, output = commands.getstatusoutput('vboxmanage unregistervm %s' % guid)
     if status != 0:
